@@ -1,4 +1,4 @@
-all: vim git
+all: vim git ctags
 
 vim: ${HOME}/.vimrc ${HOME}/.gvimrc ${HOME}/.vim
 
@@ -18,3 +18,9 @@ git: ${HOME}/.gitconfig
 
 ${HOME}/.gitconfig: ${CURDIR}/.gitconfig
 	ln -fs $^ $@
+
+ctags: ${HOME}/usr/bin/ctags
+
+${HOME}/usr/bin/ctags: ${CURDIR}/ctags
+	cd ctags; ./configure --prefix=${HOME}/usr
+	cd ctags; make && make install
