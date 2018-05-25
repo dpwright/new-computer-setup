@@ -38,3 +38,5 @@ mutt/stamp-h1
 mutt/txt2c
 
 tags
+mutt/hcversion.h
+mutt/mutt_md5
