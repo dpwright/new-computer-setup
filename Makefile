@@ -24,3 +24,9 @@ ctags: ${HOME}/usr/bin/ctags
 ${HOME}/usr/bin/ctags: ${CURDIR}/ctags
 	cd ctags; ./configure --prefix=${HOME}/usr
 	cd ctags; make && make install
+
+ssl: ${HOME}/usr/lib/libssl.a
+
+${HOME}/usr/lib/libssl.a: ${CURDIR}/openssl
+	cd openssl; ./config --prefix=${HOME}/usr
+	cd openssl; make && make install
