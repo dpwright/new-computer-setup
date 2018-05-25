@@ -30,3 +30,8 @@ ssl: ${HOME}/usr/lib/libssl.a
 ${HOME}/usr/lib/libssl.a: ${CURDIR}/openssl
 	cd openssl; ./config --prefix=${HOME}/usr
 	cd openssl; make && make install
+
+lmdb: ${HOME}/usr/lib/liblmdb.a
+
+${HOME}/usr/lib/liblmdb.a: ${CURDIR}/lmdb
+	cd lmdb/libraries/liblmdb; make && make install
