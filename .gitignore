@@ -2,3 +2,4 @@ ctags/*.o
 ctags/config.*
 ctags/ctags
 ctags/Makefile
+tags
