@@ -1,0 +1,56 @@
+[user]
+	name = Daniel P. Wright
+	email = dani@dpwright.com
+[core]
+	editor = vim
+	precomposeunicode = true
+	excludesfile = ~/.gitignore
+[mergetool]
+	keepBackup = false
+[push]
+	default = simple
+[pull]
+	rebase = true
+[credential]
+	helper = osxkeychain
+[alias]
+	st = status -sb
+	ci = commit
+	cia = commit --amend
+	co = checkout
+	br = branch
+	sb = show-branch
+	cp = cherry-pick
+	staged = diff --cached
+	unstage = reset HEAD
+	rb = rebase
+	rbc = rebase --continue
+	rbs = rebase --skip
+	rl = reflog
+	rs = remote show
+	rt = remote
+	ru = remote update
+	rp = remote prune
+	sm = submodule
+	lg = log --graph --pretty=format:'%Cred%h%Creset - %Cgreen(%ad)%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=local
+	lgf = log --graph --pretty=format:'%Cred%H%Creset - %Cgreen(%ad)%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit --date=local
+	lgs = log --pretty=format:'%h (%s, %ad)' --date=short --graph
+	nm = !git name-rev --stdin --always --name-only
+	last = !git --no-pager lg -20
+	lastf = !git --no-pager lgf -20
+	lastn = !git --no-pager lgf -20 | git nm
+	sub = submodule update --init --recursive 
+	dtl = show --pretty=format:'%Cred%h%Creset - %Cgreen(%ad)%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset\n\n%b\n---' --date=local --full-diff
+	who = shortlog -n -s --no-merges
+	fa = fetch --all
+	dt = "!f() { vim -p $(git diff --name-only $@ | grep -v '.axf$' | grep -v '.map$' | grep -v '.amx$' | grep -v '.bxml$') +\"tabdo Gdiff $@\" +tabfirst; }; f"
+	amend-commit = "!f() { START=`(git symbolic-ref -q HEAD || git rev-parse HEAD) | cut -d"/" -f 3`; git checkout -q $1 && git commit --amend && git rebase --onto HEAD $1 $START; }; f"
+	children = "!f() { git branch --no-color --contains $@ | sed 's/^[ *]*//' | grep -v \"^$@$\"; }; f"
+	all-commits-ever = "!git fsck --no-reflog | awk '/dangling commit/ {print $3}'"
+	refs-by-date = for-each-ref --format='%(committerdate:short) %(refname)'
+	remote-for-branch = "!f() { git for-each-ref --format='%(upstream:short)' `for b in $@; do echo refs/heads/$b; done` | sed 's:/.*$::'; }; f"
+	sync = "!f() { for b in $@; do git fetch `git remote-for-branch $b` $b:$b; done }; f"
+	get-file = "!f() { git show $1:$2 > $2; }; f"
+	get-media = "!f() { git show $1:$2 | git-media filter-smudge > $2; }; f"
+	stashlog = "!f() { git stash list | sed 's/:.*//' | xargs gitk --all; }; f"
+	stashlg = "!f() { git stash list | sed 's/:.*//' | xargs git lg --all; }; f"

@@ -1,4 +1,4 @@
-all: vim
+all: vim git
 
 vim: ${HOME}/.vimrc ${HOME}/.gvimrc ${HOME}/.vim
 
@@ -13,3 +13,8 @@ ${HOME}/.vim: ${CURDIR}/.vim
 
 ${HOME}/.vim/.vimrc: ${HOME}/.vim
 ${HOME}/.vim/.gvimrc: ${HOME}/.vim
+
+git: ${HOME}/.gitconfig
+
+${HOME}/.gitconfig: ${CURDIR}/.gitconfig
+	ln -fs $^ $@
