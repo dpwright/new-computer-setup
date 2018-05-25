@@ -1,4 +1,4 @@
-all: vim git ctags
+all: vim git ctags mutt
 
 vim: ${HOME}/.vimrc ${HOME}/.gvimrc ${HOME}/.vim
 
@@ -35,3 +35,10 @@ lmdb: ${HOME}/usr/lib/liblmdb.a
 
 ${HOME}/usr/lib/liblmdb.a: ${CURDIR}/lmdb
 	cd lmdb/libraries/liblmdb; make && make install
+
+mutt: ${HOME}/usr/bin/mutt
+
+# If you get a dotlock error, try this: sudo dseditgroup -o edit -a dpwright -t user mail
+${HOME}/usr/bin/mutt: ${CURDIR}/mutt
+	cd mutt; ./configure --prefix ${HOME}/usr --enable-hcache --enable-sidebar --enable-imap --enable-smtp --with-regex --with-ssl=${HOME}/usr
+	cd mutt; make && make install
