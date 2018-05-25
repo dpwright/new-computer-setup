@@ -39,6 +39,6 @@ ${HOME}/usr/lib/liblmdb.a: ${CURDIR}/lmdb
 mutt: ${HOME}/usr/bin/mutt
 
 # If you get a dotlock error, try this: sudo dseditgroup -o edit -a dpwright -t user mail
-${HOME}/usr/bin/mutt: ${CURDIR}/mutt
-	cd mutt; ./configure --prefix ${HOME}/usr --enable-hcache --enable-sidebar --enable-imap --enable-smtp --with-regex --with-ssl=${HOME}/usr
+${HOME}/usr/bin/mutt: ${CURDIR}/mutt lmdb ssl
+	cd mutt; ./configure --prefix ${HOME}/usr --enable-hcache --enable-sidebar --enable-imap --enable-smtp --with-regex --with-ssl=${HOME}/usr --with-lmdb=${HOME}/usr
 	cd mutt; make && make install
