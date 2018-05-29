@@ -36,9 +36,12 @@ lmdb: ${HOME}/usr/lib/liblmdb.a
 ${HOME}/usr/lib/liblmdb.a: ${CURDIR}/lmdb
 	cd lmdb/libraries/liblmdb; make && make install
 
-mutt: ${HOME}/usr/bin/mutt
+mutt: ${HOME}/usr/bin/mutt ${HOME}/usr/bin/muttdown
 
 # If you get a dotlock error, try this: sudo dseditgroup -o edit -a dpwright -t user mail
 ${HOME}/usr/bin/mutt: ${CURDIR}/mutt lmdb ssl
 	cd mutt; ./configure --prefix ${HOME}/usr --enable-hcache --enable-sidebar --enable-imap --enable-smtp --with-regex --with-ssl=${HOME}/usr --with-lmdb=${HOME}/usr
 	cd mutt; make && make install
+
+${HOME}/usr/bin/muttdown: ${CURDIR}/muttdown
+	pip install --prefix ${HOME}/usr --editable muttdown

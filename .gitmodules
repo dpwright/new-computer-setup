@@ -4,3 +4,6 @@
 [submodule "lmdb"]
 	path = lmdb
 	url = https://github.com/dpwright/lmdb.git
+[submodule "muttdown"]
+	path = muttdown
+	url = https://github.com/Roguelazer/muttdown.git
