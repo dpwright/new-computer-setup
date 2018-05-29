@@ -1,4 +1,9 @@
-all: vim git ctags mutt
+all: bash vim git ctags mutt
+
+bash: ${HOME}/.bash_profile
+
+${HOME}/.bash_profile: ${CURDIR}/.bash_profile
+	ln -fs $^ $@
 
 vim: ${HOME}/.vimrc ${HOME}/.gvimrc ${HOME}/.vim
 
